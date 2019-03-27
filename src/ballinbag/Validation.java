@@ -1,6 +1,6 @@
 package ballinbag;
 
-public class Validation {
+public interface Validation {
 
-
+boolean canBallBeAdded();
 }

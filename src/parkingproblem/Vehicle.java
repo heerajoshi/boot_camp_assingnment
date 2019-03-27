@@ -7,7 +7,7 @@ class Vehicle {
     this.vehicleNumber = vehicleNumber;
   }
 
-  public int getVehicleNumber() {
+  int getVehicleNumber() {
     return vehicleNumber;
   }
 }

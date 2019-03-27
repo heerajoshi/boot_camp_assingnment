@@ -58,6 +58,17 @@ class ParkingLotTest {
 
     assertTrue(mockAttendant.hasAttendantBeenNotifiedFree);
   }
+
+  @Test
+  void shouldUnParkCar() {
+    MockAttendant mockAttendant = new MockAttendant();
+    ParkingLot parkingLot = new ParkingLot(2, 1, mockAttendant);
+
+    parkingLot.park(new Vehicle(123));
+    parkingLot.park(new Vehicle(120));
+
+    assertTrue(parkingLot.unpark(123));
+  }
 }
 
 

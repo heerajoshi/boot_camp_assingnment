@@ -1,12 +1,15 @@
 package parkingproblem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class ParkingLot {
 
   private int capacity;
-  private List<Vehicle> parkedVehicles;
+//  private List<Vehicle> parkedVehicles;
+  private Map<Integer, Vehicle> parkedVehicles;
   private int id;
   private ParkingAttendant attendant;
 
@@ -19,7 +22,7 @@ class ParkingLot {
     this.capacity = capacity;
     this.id = id;
     this.attendant = attendant;
-    this.parkedVehicles = new ArrayList<>(capacity);
+    this.parkedVehicles = new HashMap<>(capacity);
   }
 
 
@@ -27,7 +30,7 @@ class ParkingLot {
     if (this.isFull()) {
       return false;
     }
-    parkedVehicles.add(vehicle);
+    parkedVehicles.put(vehicle.getVehicleNumber(),vehicle);
 
     notifyAttendantIfParkingFull();
     return true;
@@ -48,15 +51,10 @@ class ParkingLot {
   }
 
   boolean unpark(int vehicleNumber) {
-    for (int index = 0; index < this.parkedVehicles.size(); index++) {
-      Vehicle parkedVehicle = this.parkedVehicles.get(index);
-      if(parkedVehicle.getVehicleNumber() == vehicleNumber){
-        this.parkedVehicles.remove(index);
-        notifyAttendantIfParkingFree();
-        return true;
-      }
-    }
-    return false;
+    Vehicle removedVehicle = this.parkedVehicles.remove(vehicleNumber);
+    if(removedVehicle == null) return false;
+    notifyAttendantIfParkingFree();
+    return true;
   }
 
   private void notifyAttendantIfParkingFree() {

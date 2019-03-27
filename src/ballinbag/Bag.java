@@ -5,8 +5,10 @@ import java.util.*;
 class Bag {
 
   Map<BallColor, List<Ball>> balls;
+  private int numberOfBalls;
 
-  Bag() {
+  Bag(int numberOfBalls) {
+    this.numberOfBalls = numberOfBalls;
     this.balls = new HashMap<>();
   }
 
@@ -16,6 +18,12 @@ class Bag {
       totalBalls += balls.get(ballColor).size();
     }
     return totalBalls;
+  }
+
+
+  boolean isFull(){
+
+    return balls.size()>=numberOfBalls;
   }
 
   boolean validateRedBalls(){
